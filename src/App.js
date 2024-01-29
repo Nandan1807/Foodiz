@@ -1,25 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Login from "./Screens/Login";
+import Signup from "./Screens/Signup";
+import { CartProvider } from "./Components/Contextreducer";
+import MyOrders from "./Screens/MyOrders";
+import Home from "./Screens/Home";  
+import Admin from "./Screens/Admin";
+import AdminItems from "./Components/AdminItems";
+import Adminorders from "./Components/Adminorders";
+import Adminform from "./Screens/Adminform";
 
-function App() {
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <BrowserRouter>
+        <CartProvider>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/createuser" element={<Signup />} />
+            <Route path="/myorder" element={<MyOrders />} />
+            <Route path="/foodiz/admin" element={<Admin/>} >
+            <Route index element={<AdminItems/>} />
+            <Route path="/foodiz/admin/orders" element={<Adminorders/>} />
+            </Route>
+            <Route path="/foodiz/admin/form/:id" element={<Adminform/>} />
+          </Routes>
+        </CartProvider>
+      </BrowserRouter>
+    </>
   );
 }
-
-export default App;
