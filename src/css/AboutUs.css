@@ -1,0 +1,35 @@
+.about-us-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 50px auto;
+  }
+  
+  .about-us-content {
+    width: 80%;
+    padding: 20px;
+    background-color: #cecbcb;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .about-us-content h1 {
+    color: #333;
+  }
+  
+  .about-us-content p {
+    color: #666;
+    line-height: 1.6;
+  }
+  
+  .about-us-image {
+    width: 50%;
+  }
+  
+  .about-us-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  }
+  

@@ -21,13 +21,21 @@ router.post("/createuser",
         let securepass = await bcrypt.hash(req.body.password, salt);
 
         try {
-            await user.create({
+            const result = await user.create({
                 name: req.body.name,
                 location: req.body.location,
                 password: securepass,
                 email: req.body.email
             })
-            res.json({ success: true });
+            const data = {
+                enduser: {
+                    id: result.id
+                }
+            }
+
+            const authtoken = jwt.sign(data, jwtsecret);
+
+            return res.json({ success: true, authtoken: authtoken });
         } catch (error) {
             console.log(error);
             res.json({ success: false });

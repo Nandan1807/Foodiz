@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import "./signup.css";
+import "../css/signup.css";
 
 export default function Adminform() {
     const params = useParams();
@@ -14,7 +14,7 @@ export default function Adminform() {
 
     useEffect(() => {
         if (params.id !== "0") {
-            fetch("http://localhost:8000/api/getonefooddata/" + params.id)
+            fetch("https://foodizbackend.onrender.com/api/getonefooddata/" + params.id)
                 .then(res => res.json())
                 .then(res => setItem(res))
         }
@@ -23,14 +23,14 @@ export default function Adminform() {
     const handleSubmit = () => {
 
         if (params.id !== "0") {
-            fetch("http://localhost:8000/api/updatefooddata/" + params.id, {
+            fetch("https://foodizbackend.onrender.com/api/updatefooddata/" + params.id, {
                 method: "PUT",
                 headers: { "content-Type": "application/json" },
                 body: JSON.stringify(item)
             }).then(nav("/foodiz/admin"))
         }
         else {
-            fetch("http://localhost:8000/api/insertfooddata", {
+            fetch("https://foodizbackend.onrender.com/api/insertfooddata", {
                 method: "POST",
                 headers: { "content-Type": "application/json" },
                 body: JSON.stringify(item)
@@ -39,9 +39,7 @@ export default function Adminform() {
     }
 
     const handleNext = () => {
-        console.log(item);
         setnext(false);
-        console.log(item);
     }
 
     const change = (e) => {
@@ -52,12 +50,18 @@ export default function Adminform() {
         setItem(prevstate => {
             const updatedOptions = [...prevstate.options];
             const updatedOption = { ...updatedOptions[index] };
-            const Value = updatedOption[currentKey];
-            for (let i = 0; i < updatedOptions.length; i++) {
-                if (updatedOptions[i][currentKey] == Value) {
-                    updatedOptions[i][newKey] = newValue;
+            const keys = Object.keys(updatedOption);
+            const newobj = keys.reduce((acc, val) => {
+                if (val === currentKey) {
+                    acc[newKey] = updatedOption[currentKey];
                 }
-            }
+                else {
+                    acc[val] = updatedOption[val];
+                }
+                return acc;
+            }, {});
+
+            newobj[newKey] = newValue;
 
             // delete updatedOption[currentKey];
 
@@ -65,9 +69,10 @@ export default function Adminform() {
             // updatedOption[newKey] = newValue;
 
             // // Update the options array
-            // updatedOptions[index] = updatedOption;
+            updatedOptions[index] = newobj;
 
             return {
+                ...prevstate,
                 options: updatedOptions,
             };
         })
@@ -100,24 +105,24 @@ export default function Adminform() {
                     <div className="shape"></div>
                 </div>
                 {next ?
-                    <form>
+                    <form className="backform form"> 
 
                         <label htmlFor="CatagoryName">Category name</label>
-                        <input type="text" placeholder="Category name" id="Categoryname" required name="CategoryName" value={item.CategoryName} onChange={change} />
+                        <input className="backinput" type="text" placeholder="Category name" id="Categoryname" required name="CategoryName" value={item.CategoryName} onChange={change} />
 
                         <label htmlFor="name">Item name</label>
-                        <input type="text" placeholder="Item name" id="itemname" required name="name" value={item.name} onChange={change} />
+                        <input className="backinput" type="text" placeholder="Item name" id="itemname" required name="name" value={item.name} onChange={change} />
 
                         <label htmlFor="image">Image</label>
-                        <input type="text" placeholder="image" id="image" required name="img" value={item.img} onChange={change} />
+                        <input className="backinput" type="text" placeholder="image" id="image" required name="img" value={item.img} onChange={change} />
 
                         <label htmlFor="description">Description</label>
-                        <textarea type="text" placeholder="description" id="description" rows={3} cols={39} required name="description" value={item.description} onChange={change} ></textarea>
+                        <textarea className="backinput" type="text" placeholder="description" id="description" rows={3} cols={39} required name="description" value={item.description} onChange={change} ></textarea>
 
                         <button className="button" type="submit" onClick={handleNext}>Next</button>
                     </form>
                     :
-                    <form onSubmit={handleSubmit}>
+                    <form className="backform form" onSubmit={handleSubmit}>
                         <div className="overflow-auto h-50">
                             {
                                 item.options.length > 0 ?
@@ -125,9 +130,9 @@ export default function Adminform() {
                                         return (
                                             Object.keys(option).map((key) => (
                                                 <div>
-                                                    <label>Option:</label>
-                                                    <input type="text" placeholder="Enter option" value={key} onChange={(e) => handleInputChange(index, key, e.target.value, option[key])} required />
-                                                    <input type="text" placeholder="Enter price" value={option[key]} onChange={(e) => handleInputChange(index, key, key, e.target.value)} required />
+                                                    <label className="backlabel">Option:</label>
+                                                    <input className="backinput" type="text" placeholder="Enter option" value={key} onChange={(e) => handleInputChange(index, key, e.target.value, option[key])} required />
+                                                    <input className="backinput" type="text" placeholder="Enter price" value={option[key]} onChange={(e) => handleInputChange(index, key, key, e.target.value)} required />
                                                     <hr />
                                                 </div>
                                             ))
@@ -137,9 +142,9 @@ export default function Adminform() {
                             }{opt > 0 ?
                                 [...Array(opt)].map(() => (
                                     <div>
-                                        <label>Option:</label>
-                                        <input type="text" placeholder="Enter option" value={inskey} onChange={(e) => setinskey(e.target.value)} required />
-                                        <input type="text" placeholder="Enter price" value={insvalue} onChange={(e) => setinsvalue(e.target.value)} required />
+                                        <label className="backlabel">Option:</label>
+                                        <input className="backinput" type="text" placeholder="Enter option" value={inskey} onChange={(e) => setinskey(e.target.value)} required />
+                                        <input className="backinput" type="text" placeholder="Enter price" value={insvalue} onChange={(e) => setinsvalue(e.target.value)} required />
                                         <hr />
                                     </div>
                                 ))

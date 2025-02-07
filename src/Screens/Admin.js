@@ -6,17 +6,21 @@ export default function Admin() {
             {
                 (localStorage.getItem("userEmail") === "admin@gmail.com") ?
                     <>
-                        <div className="text-center" style={{ height: "20vh", backgroundImage: "linear-gradient(red, black)" }}>
-                            <div className="pt-4 fw-bold fs-1">Admin Panel</div>
+                        <div style={{ height: "20vh", backgroundImage: "linear-gradient(red, black)" }}>
+                            <Link className="btn w-100 text-start fw-bold fs-6" style={{width:"100px"}} to={"/"}>← Back</Link>
+                            <div className="pt-4 text-center w-100 fw-bold fs-1">Admin Panel</div>
                         </div>
                         <div class="card text-center">
                             <div class="card-header">
-                                <ul class="nav nav-tabs card-header-tabs">
-                                    <li class="nav-item w-50 fs-4">
-                                        <Link class="nav-link  text-light" aria-current="true" to={"/foodiz/admin"}>Products</Link>
+                                <ul class="list-group list-group-horizontal nav nav-tabs card-header-tabs row">
+                                    <li class="list-item nav-item  fs-4 col">
+                                        <Link class="nav-link btn btn-danger text-light" data-mdb-ripple-color="dark" aria-current="true" to={"/foodiz/admin"}>Products</Link>
                                     </li>
-                                    <li class="nav-item w-50 fs-4">
-                                        <Link class="nav-link text-light" to="/foodiz/admin/orders">Orders</Link>
+                                    <li class="list-item nav-item  fs-4 col">
+                                        <Link class="nav-link btn btn-danger text-light" data-mdb-ripple-color="dark" to="/foodiz/admin/orders">Orders</Link>
+                                    </li>
+                                    <li class="list-item nav-item fs-4 col">
+                                        <Link class="nav-link btn btn-danger text-light" data-mdb-ripple-color="dark" to="/foodiz/admin/feedbacks">Feedbacks</Link>
                                     </li>
                                 </ul>
                             </div>

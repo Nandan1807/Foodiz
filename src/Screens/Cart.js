@@ -1,5 +1,7 @@
 import { useCart, useDispatch } from '../Components/Contextreducer';
+import useRazorpay from 'react-razorpay';
 export default function Cart() {
+  const [Razorpay] = useRazorpay();
   let data = useCart();
   let dispatch = useDispatch();
   if (data.length === 0) {
@@ -9,6 +11,40 @@ export default function Cart() {
       </div>
     )
   }
+
+  const payNow = async () => {
+    const options = {
+      key: "rzp_test_HyRPqiPoRCRV9Q",
+      amount: totalPrice * 100,
+      currency: "INR",
+      name: "Foodiz",
+      description: "Order Payment",
+      prefill: {
+        name: "user",
+        email: "youremail@example.com",
+        contact: "9999999999",
+        method: 'upi', // Setting payment method to UPI
+        vpa: 'your-upi-id@bank' // Replace with your UPI ID
+      },
+      handler: (response) => {
+        console.log(response); // Handle the payment response here
+        if (response.razorpay_payment_id) {
+          console.log("done")
+        } else {
+          console.log("fail")
+        }
+      },
+      theme: {
+        color: "black",
+      },
+    };
+  
+    const rzpay = new Razorpay(options);
+    rzpay.open();
+  }
+  
+
+
   const handleCheckOut = async () => {
     let userEmail = localStorage.getItem("userEmail");
     // console.log(data,localStorage.getItem("userEmail"),new Date())
@@ -26,6 +62,7 @@ export default function Cart() {
     console.log("JSON RESPONSE:::::", response.status)
     if (response.status === 200) {
       dispatch({ type: "DROP" })
+      payNow()
     }
   }
 

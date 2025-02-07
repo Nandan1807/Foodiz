@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 
-export default function Adminorders() {
-    const [orderData, setorderData] = useState([])
+export default function AdminContact() {
+    const [feedbackData, setfeedbackData] = useState([])
 
-    const fetchMyOrder = async () => {
-        await fetch("https://foodizbackend.onrender.com/api/allOrderData")
+    const fetchFeedbacks = async () => {
+        await fetch("https://foodizbackend.onrender.com/api/allContactUsData")
             .then(async (res) => {
                 let response = await res.json()
-                await setorderData(response)
+                await setfeedbackData(response)
             })
 
 
@@ -20,13 +20,13 @@ export default function Adminorders() {
     }
 
     useEffect(() => {
-        fetchMyOrder()
+        fetchFeedbacks()
     }, [])
 
     return (
         <div className='container'>
             <div className='row'>
-                {orderData.length > 0 ? orderData.map((emaildata) => {
+                {feedbackData.length > 0 ? feedbackData.map((emaildata) => {
                     return (
                         Array(emaildata).map(data => {
                             return (
@@ -35,15 +35,15 @@ export default function Adminorders() {
                                     <hr />
                                     {
                                         data ?
-                                            data.order_data.slice(0).reverse().map((item) => {
+                                            data.feedback_data.slice(0).reverse().map((item) => {
                                                 return (
                                                     item.map((arrayData) => {
                                                         return (
                                                             <>
-                                                                {arrayData.Order_date ?
+                                                                {arrayData.Feedback_date ?
                                                                     <div className='m-auto mt-3 text-start'>
 
-                                                                        {data = arrayData.Order_date}
+                                                                        {data = arrayData.Feedback_date}
                                                                         <hr />
                                                                     </div> :
 
@@ -52,12 +52,7 @@ export default function Adminorders() {
                                                                             <div className="card-body">
                                                                                 <h5 className="card-title">{arrayData.name}</h5>
                                                                                 <div className='container w-100 p-0' style={{ height: "38px" }}>
-                                                                                    <span className='m-1'>{arrayData.qty}</span>
-                                                                                    <span className='m-1'>{arrayData.size}</span>
-                                                                                    <span className='m-1'>{data}</span>
-                                                                                    <div className=' d-inline ms-5 h-100 w-20 fs-4' >
-                                                                                        ₹{arrayData.price}/-
-                                                                                    </div>
+                                                                                    <span className='m-1'>{arrayData.message}</span>
                                                                                 </div>
                                                                             </div>
                                                                         </div>

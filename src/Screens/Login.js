@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "./login.css";
+import "../css/login.css";
 
 export default function Login() {
   const nav = useNavigate();
@@ -34,14 +34,14 @@ export default function Login() {
         <div class="shape1"></div>
         <div class="shape1"></div>
     </div>
-    <form onSubmit={handleSubmit} className="form">
+    <form className="backform formlogin" onSubmit={handleSubmit}>
         <h3>Login Here</h3>
 
-        <label for="Email">Email</label>
-        <input type="email" placeholder="Email" id="username" pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" title="Enter valid email" required aria-describedby="emailHelp" name="email" value={user.email} onChange={change} />
+        <label className="backlabel" for="Email">Email</label>
+        <input className="backinput" type="email" placeholder="Email" id="username" pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" title="Enter valid email" required aria-describedby="emailHelp" name="email" value={user.email} onChange={change} />
 
-        <label for="password">Password</label>
-        <input type="password" placeholder="Password" id="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 5 or more characters" required name="password" value={user.password} onChange={change}/>
+        <label className="backlabel" for="password">Password</label>
+        <input className="backinput" type="password" placeholder="Password" id="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 5 or more characters" required name="password" value={user.password} onChange={change}/>
 
         <button className="button" type="submit">Log In</button>
         <div class="social">

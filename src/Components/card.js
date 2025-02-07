@@ -41,7 +41,7 @@ export default function Card(props) {
 
   return (
     <div>
-      <div className="card" style={{ width: "21.5rem", height: "550px" }}>
+      <div className="card" style={{ width: "21.5rem", height: "620px" }}>
         <img
           src={props.detail.img}
           className="card-img-top h-50"
@@ -78,8 +78,9 @@ export default function Card(props) {
           {
             (localStorage.getItem("authToken")) ?
             <>
+            <div className="text-center w-100 position-absolute bottom-0 end-0 justify-center mb-3">
+
             <hr></hr>
-            <div className="text-center">
               <button className="btn btn-danger w-75  btn1" onClick={handlecart}>Add to cart</button>
             </div>
             </> : ""

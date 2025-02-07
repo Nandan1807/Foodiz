@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Navbar from "../Components/Navbar";
 
 export default function MyOrders() {
     const [orderData, setorderData] = useState({})
@@ -33,9 +32,6 @@ export default function MyOrders() {
     }, [])
     return (
         <>
-            <div>
-                <Navbar />
-            </div>
             <div className='container'>
                 <div className='row'>
 
