@@ -14,7 +14,7 @@ export default function Adminform() {
 
     useEffect(() => {
         if (params.id !== "0") {
-            fetch("https://foodizbackend.onrender.com/api/getonefooddata/" + params.id)
+            fetch("https://backend-xi-weld.vercel.app/api/getonefooddata/" + params.id)
                 .then(res => res.json())
                 .then(res => setItem(res))
         }
@@ -23,14 +23,14 @@ export default function Adminform() {
     const handleSubmit = () => {
 
         if (params.id !== "0") {
-            fetch("https://foodizbackend.onrender.com/api/updatefooddata/" + params.id, {
+            fetch("https://backend-xi-weld.vercel.app/api/updatefooddata/" + params.id, {
                 method: "PUT",
                 headers: { "content-Type": "application/json" },
                 body: JSON.stringify(item)
             }).then(nav("/foodiz/admin"))
         }
         else {
-            fetch("https://foodizbackend.onrender.com/api/insertfooddata", {
+            fetch("https://backend-xi-weld.vercel.app/api/insertfooddata", {
                 method: "POST",
                 headers: { "content-Type": "application/json" },
                 body: JSON.stringify(item)

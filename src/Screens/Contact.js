@@ -10,7 +10,7 @@ const ContactUs = () => {
 
   const handlesubmit = async (e) =>{
     e.preventDefault();
-    let response = await fetch("https://foodizbackend.onrender.com/api/contactUsData", {
+    let response = await fetch("https://backend-xi-weld.vercel.app/api/contactUsData", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

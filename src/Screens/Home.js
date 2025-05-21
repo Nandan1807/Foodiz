@@ -9,13 +9,19 @@ export default function Home() {
   const [foodcat, setfoodcat] = useState([]);
   const [fooditem, setfooditem] = useState([]);
   const [search, setsearch] = useState("");
+  const [loaded,setloaded] = useState(false);
 
   const loadData = async () => {
-    await fetch("https://foodizbackend.onrender.com/api/fooddata")
+    await fetch("https://backend-xi-weld.vercel.app/api/fooddata")
       .then((res) => res.json())
       .then((res) => {
-        setfooditem(res[0]);
-        setfoodcat(res[1])
+        if (Array.isArray(res)) {
+          setloaded(true);
+          setfooditem(res[0]);
+          setfoodcat(res[1]);
+        } else if (res !== null && typeof res === 'object') {
+          console.log('not loaded.');
+        }
       });
 
     // console.log(fooditem, foodcat);
@@ -29,7 +35,7 @@ export default function Home() {
     <>
       {/* -----------------------carousel--------------------- */}
       {
-        fooditem.length > 0 ?
+        loaded ?
           <>
             <div>
               <div
@@ -45,35 +51,35 @@ export default function Home() {
                 >
                   <div className="carousel-item active">
                     <img
-                      src="https://source.unsplash.com/random/300×300/?burger"
+                      src={fooditem[Math.floor((Math.random() * fooditem.length) + 1)].img}
                       className="d-block w-100"
                       alt="..."
                     />
                   </div>
                   <div className="carousel-item">
                     <img
-                      src="https://source.unsplash.com/random/300×300/?pizza"
+                      src={fooditem[Math.floor((Math.random() * fooditem.length) + 1)].img}
                       className="d-block w-100"
                       alt="..."
                     />
                   </div>
                   <div className="carousel-item">
                     <img
-                      src="https://source.unsplash.com/random/300×300/?garlicbread"
+                      src={fooditem[Math.floor((Math.random() * fooditem.length) + 1)].img}
                       className="d-block w-100"
                       alt="..."
                     />
                   </div>
                   <div className="carousel-item">
                     <img
-                      src="https://source.unsplash.com/random/300×300/?pavbhaji"
+                      src={fooditem[Math.floor((Math.random() * fooditem.length) + 1)].img}
                       className="d-block w-100"
                       alt="..."
                     />
                   </div>
                   <div className="carousel-item">
                     <img
-                      src="https://source.unsplash.com/random/300×300/?fries"
+                      src={fooditem[Math.floor((Math.random() * fooditem.length) + 1)].img}
                       className="d-block w-100"
                       alt="..."
                     />

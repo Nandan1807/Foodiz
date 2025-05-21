@@ -4,7 +4,7 @@ export default function Adminorders() {
     const [orderData, setorderData] = useState([])
 
     const fetchMyOrder = async () => {
-        await fetch("https://foodizbackend.onrender.com/api/allOrderData")
+        await fetch("https://backend-xi-weld.vercel.app/api/allOrderData")
             .then(async (res) => {
                 let response = await res.json()
                 await setorderData(response)

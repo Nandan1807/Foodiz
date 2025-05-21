@@ -4,7 +4,7 @@ export default function AdminContact() {
     const [feedbackData, setfeedbackData] = useState([])
 
     const fetchFeedbacks = async () => {
-        await fetch("https://foodizbackend.onrender.com/api/allContactUsData")
+        await fetch("https://backend-xi-weld.vercel.app/api/allContactUsData")
             .then(async (res) => {
                 let response = await res.json()
                 await setfeedbackData(response)

@@ -7,7 +7,7 @@ export default function Signup() {
     const [user, setUser] = useState({ name: "", email: "", password: "", geolocation: "" });
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const response = await fetch("https://foodizbackend.onrender.com/api/createuser", {
+        const response = await fetch("https://backend-xi-weld.vercel.app/api/createuser", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

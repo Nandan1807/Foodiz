@@ -5,6 +5,7 @@ const mongoDb = require("./db");
 const cors = require("cors");
 
 app.use(cors());
+app.use(express.json());
 
 const startServer = async () => {
   try {

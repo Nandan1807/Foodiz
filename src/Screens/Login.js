@@ -7,7 +7,7 @@ export default function Login() {
   const [user, setUser] = useState({ email: "", password: "" });
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch("https://foodizbackend.onrender.com/api/loginuser", {
+    const response = await fetch("https://backend-xi-weld.vercel.app/api/loginuser", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

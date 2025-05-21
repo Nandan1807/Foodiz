@@ -17,11 +17,10 @@ export default function Card(props) {
     for(const item of data){
       if(item.id === props.detail._id){
         food = item;
-
         break;
       }
     }
-    if(food !== []){
+    if(Array.isArray(food) && food.length > 0){
       if(food.size === size){
         await dispatch({ type: "UPDATE", id: props.detail._id, price: finalPrice, qty: qty});
         return;

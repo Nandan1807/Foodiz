@@ -5,7 +5,7 @@ export default function MyOrders() {
 
     const fetchMyOrder = async () => {
         console.log(localStorage.getItem('userEmail'))
-        await fetch("https://foodizbackend.onrender.com/api/myOrderData", {
+        await fetch("https://backend-xi-weld.vercel.app/api/myOrderData", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -35,7 +35,7 @@ export default function MyOrders() {
             <div className='container'>
                 <div className='row'>
 
-                    {orderData !== {} ? Array(orderData).map(data => {
+                    {Object.keys(orderData).length > 0 ? Array(orderData).map(data => {
                         return (
                             data.orderData ?
                                 data.orderData.order_data.slice(0).reverse().map((item) => {

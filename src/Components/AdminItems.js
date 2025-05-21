@@ -6,7 +6,7 @@ export default function () {
     const nav = useNavigate();
 
     const loadData = async () => {
-        await fetch("https://foodizbackend.onrender.com/api/fooddata")
+        await fetch("https://backend-xi-weld.vercel.app/api/fooddata")
             .then((res) => res.json())
             .then((res) => {
                 setfooditem(res[0]);
@@ -61,7 +61,7 @@ export default function () {
                                                                                                 </p>
                                                                                                 <Link className="btn btn-danger" to={"/foodiz/admin/form/" + filteritems._id}>Update</Link>
                                                                                                 <button className="ms-3 btn btn-danger" onClick={async () => {
-                                                                                                    await fetch("http://localhost:8000/api/deletefooddata/" + filteritems._id, {
+                                                                                                    await fetch("https://backend-xi-weld.vercel.app/api/deletefooddata/" + filteritems._id, {
                                                                                                         method: "DELETE",
                                                                                                         headers: { "content-Type": "application/json" },
                                                                                                     }).then(nav("/foodiz/admin"));
